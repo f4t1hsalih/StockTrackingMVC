@@ -21,6 +21,7 @@
           <Property Name="ctm_surname" Type="varchar" MaxLength="30" />
           <Property Name="ctm_city" Type="varchar" MaxLength="15" />
           <Property Name="ctm_balance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ctm_status" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_products">
           <Key>
@@ -148,6 +149,7 @@
           <Property Name="ctm_city" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="ctm_balance" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="tbl_sales" Relationship="Self.FK_tbl_sales_tbl_customers" FromRole="tbl_customers" ToRole="tbl_sales" />
+          <Property Name="ctm_status" Type="Boolean" />
         </EntityType>
         <EntityType Name="tbl_products">
           <Key>
@@ -276,6 +278,7 @@
           <EntitySetMapping Name="tbl_customers">
             <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_customers">
               <MappingFragment StoreEntitySet="tbl_customers">
+                <ScalarProperty Name="ctm_status" ColumnName="ctm_status" />
                 <ScalarProperty Name="ctm_id" ColumnName="ctm_id" />
                 <ScalarProperty Name="ctm_name" ColumnName="ctm_name" />
                 <ScalarProperty Name="ctm_surname" ColumnName="ctm_surname" />
