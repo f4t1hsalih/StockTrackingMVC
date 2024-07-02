@@ -1,8 +1,7 @@
-﻿using StockTrackingMVC.Models.Entity;
+﻿using PagedList;
+using StockTrackingMVC.Models.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using PagedList;
-using PagedList.Mvc;
 
 namespace StockTrackingMVC.Controllers
 {
@@ -30,10 +29,17 @@ namespace StockTrackingMVC.Controllers
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
-                customers.ctm_status = true;
-                db.tbl_customers.Add(customers);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (!ModelState.IsValid)
+                {
+                    return View(customers);
+                }
+                else
+                {
+                    customers.ctm_status = true;
+                    db.tbl_customers.Add(customers);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
         }
 
@@ -64,13 +70,20 @@ namespace StockTrackingMVC.Controllers
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
-                var value = db.tbl_customers.Find(customers.ctm_id);
-                value.ctm_name = customers.ctm_name;
-                value.ctm_surname = customers.ctm_surname;
-                value.ctm_city = customers.ctm_city;
-                value.ctm_balance = customers.ctm_balance;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (!ModelState.IsValid)
+                {
+                    return View(customers);
+                }
+                else
+                {
+                    var value = db.tbl_customers.Find(customers.ctm_id);
+                    value.ctm_name = customers.ctm_name;
+                    value.ctm_surname = customers.ctm_surname;
+                    value.ctm_city = customers.ctm_city;
+                    value.ctm_balance = customers.ctm_balance;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
         }
     }
