@@ -33,5 +33,17 @@ namespace StockTrackingMVC.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        //GET: Category/DeleteCategory
+        public ActionResult DeleteCategory(int id)
+        {
+            using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
+            {
+                var category = db.tbl_categories.Find(id);
+                db.tbl_categories.Remove(category);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
