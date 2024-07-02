@@ -14,7 +14,7 @@ namespace StockTrackingMVC.Controllers
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
                 //var customers = db.tbl_customers.ToList();
-                var customerList = db.tbl_customers.Where(x => x.ctm_status == true).ToList().ToPagedList(page, 10);
+                var customerList = db.tbl_customers.Where(x => x.ctm_status != false).ToList().ToPagedList(page, 10);
                 return View(customerList);
             }
         }
@@ -30,6 +30,7 @@ namespace StockTrackingMVC.Controllers
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
+                customers.ctm_status = true;
                 db.tbl_customers.Add(customers);
                 db.SaveChanges();
                 return RedirectToAction("Index");

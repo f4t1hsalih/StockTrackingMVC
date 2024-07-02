@@ -11,7 +11,8 @@ namespace StockTrackingMVC.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tbl_customers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +22,11 @@ namespace StockTrackingMVC.Models.Entity
         }
     
         public int ctm_id { get; set; }
+
+        [Required(ErrorMessage ="Ad Alaný Boþ Geçilemez")]
         public string ctm_name { get; set; }
+
+        [Required(ErrorMessage = "Soyad Alaný Boþ Geçilemez")]
         public string ctm_surname { get; set; }
         public string ctm_city { get; set; }
         public Nullable<decimal> ctm_balance { get; set; }

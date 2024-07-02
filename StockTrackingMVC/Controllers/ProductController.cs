@@ -11,7 +11,7 @@ namespace StockTrackingMVC.Controllers
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
-                var products = db.tbl_products.Include("tbl_categories").Where(x => x.prd_status == true).ToList();
+                var products = db.tbl_products.Include("tbl_categories").Where(x => x.prd_status != false).ToList();
                 return View(products);
             }
         }
@@ -32,6 +32,7 @@ namespace StockTrackingMVC.Controllers
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
+                product.prd_status = true;
                 db.tbl_products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
