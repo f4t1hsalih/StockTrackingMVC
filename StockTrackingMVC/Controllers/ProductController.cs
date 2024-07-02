@@ -16,7 +16,7 @@ namespace StockTrackingMVC.Controllers
             }
         }
 
-        // GET: AddProduct
+        // AddProduct
         [HttpGet]
         public ActionResult AddProduct()
         {
@@ -27,7 +27,6 @@ namespace StockTrackingMVC.Controllers
             }
         }
 
-        // POST: AddProduct
         [HttpPost]
         public ActionResult AddProduct(tbl_products product)
         {
@@ -37,6 +36,23 @@ namespace StockTrackingMVC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+        }
+
+        // EditProduct
+        [HttpGet]
+        public ActionResult EditProduct(int id)
+        {
+            using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
+            {
+                ViewBag.CategoriesForProduct = new SelectList(db.tbl_categories.ToList(), "ctg_id", "ctg_name");
+                var prod = db.tbl_products.Find(id);
+                return View(prod);
+            }
+        }
+        [HttpPost]
+        public ActionResult EditProduct(tbl_products products)
+        {
+            return RedirectToAction("Index");
         }
     }
 }
