@@ -1,0 +1,33 @@
+﻿@model StockTrackingMVC.Models.Entity.tbl_customers
+
+@{
+    ViewBag.Title = "Müşteri Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-top:10px">Müşteri Ekle</h2>
+<hr />
+
+@using (Html.BeginForm("AddCustomer", "Customer", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Müşteri Adı", htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.ctm_name, new { htmlAttributes = new { @class = "form-control", placeholder = "Müşteri Adı..." } })
+    </div>
+    <div class="form-group">
+        @Html.Label("Müşteri Soyadı", htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.ctm_surname, new { htmlAttributes = new { @class = "form-control", placeholder = "Müşteri Soyadı..." } })
+    </div>
+    <div class="form-group">
+        @Html.Label("Müşteri Şehri", htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.ctm_city, new { htmlAttributes = new { @class = "form-control", placeholder = "Müşteri Şehri..." } })
+    </div>
+    <div class="form-group">
+        @Html.Label("Müşteri Bakiyesi", htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.ctm_balance, new { htmlAttributes = new { @class = "form-control", placeholder = "Müşteri Bakiyesi..." } })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Ekle" class="btn btn-success" />
+    </div>
+}

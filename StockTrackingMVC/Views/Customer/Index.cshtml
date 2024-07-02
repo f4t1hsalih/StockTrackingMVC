@@ -48,7 +48,7 @@
         </table>
 
         <div class="pagination-container">
-            @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }), PagedListRenderOptions.TwitterBootstrapPagerAligned)
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.TwitterBootstrapPagerAligned)
         </div>
     </div>
 }

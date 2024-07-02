@@ -1,0 +1,11 @@
+﻿/* site.css */
+/* Sabit navbar için stil */
+body {
+    padding-top: 56px; /* Navbar yüksekliği */
+}
+
+@media (min-width: 992px) {
+    body {
+        padding-top: 70px; /* Sabit navbar yüksekliği için 992px ve üzeri ekranlar */
+    }
+}
