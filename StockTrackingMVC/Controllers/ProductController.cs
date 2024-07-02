@@ -15,5 +15,28 @@ namespace StockTrackingMVC.Controllers
                 return View(products);
             }
         }
+
+        // GET: AddProduct
+        [HttpGet]
+        public ActionResult AddProduct()
+        {
+            using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
+            {
+                ViewBag.CategoriesForProduct = new SelectList(db.tbl_categories.ToList(), "ctg_id", "ctg_name");
+                return View();
+            }
+        }
+
+        // POST: AddProduct
+        [HttpPost]
+        public ActionResult AddProduct(tbl_products product)
+        {
+            using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
+            {
+                db.tbl_products.Add(product);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
