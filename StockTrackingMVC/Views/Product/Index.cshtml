@@ -1,0 +1,56 @@
+﻿@model List<StockTrackingMVC.Models.Entity.tbl_products>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Ürün Listesi</h2>
+<hr />
+
+<p>
+    @Html.ActionLink("Yeni Oluştur", "AddProduct", null, new { @class = "btn btn-primary" })
+</p>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Ad</th>
+                    <th scope="col">Marka</th>
+                    <th scope="col">Stok</th>
+                    <th scope="col">Alış Fiyatı</th>
+                    <th scope="col">Satış Fiyatı</th>
+                    <th scope="col">Kategori</th>
+                    <th scope="col">Düzenle</th>
+                    <th scope="col">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.prd_name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.prd_brand)</td>
+                        <td>@Html.DisplayFor(modelItem => item.prd_stock)</td>
+                        <td>@Html.DisplayFor(modelItem => item.prd_purchasePrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.prd_salePrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.tbl_categories.ctg_name)</td>
+                        <td>
+                            @Html.ActionLink("Düzenle", "EditProduct", new { id = item.prd_id }, new { @class = "btn btn-info btn-sm mr-1" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Sil", "DeleteProduct", new { id = item.prd_id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Bu ürünü silmek istediğinizden emin misiniz?');" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p class="text-muted">Listelenecek ürün bulunamadı.</p>
+}
