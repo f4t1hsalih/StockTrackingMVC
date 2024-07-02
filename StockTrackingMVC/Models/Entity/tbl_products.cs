@@ -27,6 +27,7 @@ namespace StockTrackingMVC.Models.Entity
         public Nullable<decimal> prd_purchasePrice { get; set; }
         public Nullable<decimal> prd_salePrice { get; set; }
         public Nullable<int> prd_ctg_id { get; set; }
+        public Nullable<bool> prd_status { get; set; }
     
         public virtual tbl_categories tbl_categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

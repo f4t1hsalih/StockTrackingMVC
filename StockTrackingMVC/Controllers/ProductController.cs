@@ -65,5 +65,17 @@ namespace StockTrackingMVC.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        // DeleteProduct
+        public ActionResult DeleteProduct(int id)
+        {
+            using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
+            {
+                var value = db.tbl_products.Find(id);
+                value.prd_status = false;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_StockTrackingMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB_StockTrackingMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_categories">
           <Key>
             <PropertyRef Name="ctg_id" />
@@ -33,6 +33,7 @@
           <Property Name="prd_purchasePrice" Type="decimal" Precision="18" Scale="2" />
           <Property Name="prd_salePrice" Type="decimal" Precision="18" Scale="2" />
           <Property Name="prd_ctg_id" Type="int" />
+          <Property Name="prd_status" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_sales">
           <Key>
@@ -125,8 +126,7 @@
             <End Role="tbl_sales" EntitySet="tbl_sales" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_StockTrackingMVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -162,6 +162,7 @@
           <Property Name="prd_ctg_id" Type="Int32" />
           <NavigationProperty Name="tbl_categories" Relationship="Self.FK_tbl_products_tbl_categories" FromRole="tbl_products" ToRole="tbl_categories" />
           <NavigationProperty Name="tbl_sales" Relationship="Self.FK_tbl_sales_tbl_products" FromRole="tbl_products" ToRole="tbl_sales" />
+          <Property Name="prd_status" Type="Boolean" />
         </EntityType>
         <EntityType Name="tbl_sales">
           <Key>
@@ -286,6 +287,7 @@
           <EntitySetMapping Name="tbl_products">
             <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_products">
               <MappingFragment StoreEntitySet="tbl_products">
+                <ScalarProperty Name="prd_status" ColumnName="prd_status" />
                 <ScalarProperty Name="prd_id" ColumnName="prd_id" />
                 <ScalarProperty Name="prd_name" ColumnName="prd_name" />
                 <ScalarProperty Name="prd_brand" ColumnName="prd_brand" />
