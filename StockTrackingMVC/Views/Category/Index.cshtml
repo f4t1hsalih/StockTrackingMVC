@@ -1,8 +1,45 @@
-﻿
+﻿@model List<StockTrackingMVC.Models.Entity.tbl_categories>
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Kategori Listesi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Kategori Listesi</h2>
 
+<p>
+    @Html.ActionLink("Yeni Oluştur", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Kategori Adı</th>
+                    <th scope="col">Düzenle</th>
+                    <th scope="col">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayName(item.ctg_name)</td>
+                        <td>
+                            @Html.ActionLink("Düzenle", "Edit", new { id = item.ctg_id }, new { @class = "btn btn-info btn-sm mr-1" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Sil", "Delete", new { id = item.ctg_id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Bu kategoriyi silmek istediğinizden emin misiniz?');" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p class="text-muted">Listelenecek kategori bulunamadı.</p>
+}
