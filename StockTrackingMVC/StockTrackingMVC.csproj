@@ -233,6 +233,7 @@
     <Content Include="Views\Product\EditProduct.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\AddCustomer.cshtml" />
+    <Content Include="Views\Customer\UpdateCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

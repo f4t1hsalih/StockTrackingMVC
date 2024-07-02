@@ -47,5 +47,16 @@ namespace StockTrackingMVC.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        // UpdateCustomer
+        [HttpGet]
+        public ActionResult UpdateCustomer(int id)
+        {
+            using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
+            {
+                var values = db.tbl_customers.Find(id);
+                return View(values);
+            }
+        }
     }
 }
