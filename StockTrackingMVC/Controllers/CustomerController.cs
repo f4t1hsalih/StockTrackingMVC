@@ -58,5 +58,19 @@ namespace StockTrackingMVC.Controllers
                 return View(values);
             }
         }
+        [HttpPost]
+        public ActionResult UpdateCustomer(tbl_customers customers)
+        {
+            using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
+            {
+                var value = db.tbl_customers.Find(customers.ctm_id);
+                value.ctm_name = customers.ctm_name;
+                value.ctm_surname = customers.ctm_surname;
+                value.ctm_city = customers.ctm_city;
+                value.ctm_balance = customers.ctm_balance;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
