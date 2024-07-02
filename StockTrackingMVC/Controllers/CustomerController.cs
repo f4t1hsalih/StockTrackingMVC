@@ -14,7 +14,7 @@ namespace StockTrackingMVC.Controllers
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
                 //var customers = db.tbl_customers.ToList();
-                var customerList = db.tbl_customers.ToList().ToPagedList(sayfa, 3);
+                var customerList = db.tbl_customers.ToList().ToPagedList(sayfa, 10);
                 return View(customerList);
             }
         }

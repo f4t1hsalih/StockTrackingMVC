@@ -3,7 +3,7 @@
 @model IPagedList<StockTrackingMVC.Models.Entity.tbl_customers>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Müşteri Listesi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -46,6 +46,10 @@
                 }
             </tbody>
         </table>
+
+        <div class="pagination-container">
+            @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }), PagedListRenderOptions.TwitterBootstrapPagerAligned)
+        </div>
     </div>
 }
 else
