@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_StockTrackingMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_categories">
+          <Key>
+            <PropertyRef Name="ctg_id" />
+          </Key>
+          <Property Name="ctg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ctg_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_customers">
+          <Key>
+            <PropertyRef Name="ctm_id" />
+          </Key>
+          <Property Name="ctm_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ctm_name" Type="varchar" MaxLength="30" />
+          <Property Name="ctm_surname" Type="varchar" MaxLength="30" />
+          <Property Name="ctm_city" Type="varchar" MaxLength="15" />
+          <Property Name="ctm_balance" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbl_products">
+          <Key>
+            <PropertyRef Name="prd_id" />
+          </Key>
+          <Property Name="prd_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prd_name" Type="varchar" MaxLength="50" />
+          <Property Name="prd_brand" Type="varchar" MaxLength="50" />
+          <Property Name="prd_stock" Type="smallint" />
+          <Property Name="prd_purchasePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="prd_salePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="prd_ctg_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_sales">
+          <Key>
+            <PropertyRef Name="sal_id" />
+          </Key>
+          <Property Name="sal_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sal_prd_id" Type="int" />
+          <Property Name="sal_stf_id" Type="int" />
+          <Property Name="sal_ctm_id" Type="int" />
+          <Property Name="sal_salePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="sal_date" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="tbl_staff">
+          <Key>
+            <PropertyRef Name="stf_id" />
+          </Key>
+          <Property Name="stf_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stf_name" Type="varchar" MaxLength="30" />
+          <Property Name="stf_surname" Type="varchar" MaxLength="30" />
+          <Property Name="stf_department" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_tbl_products_tbl_categories">
+          <End Role="tbl_categories" Type="Self.tbl_categories" Multiplicity="0..1" />
+          <End Role="tbl_products" Type="Self.tbl_products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_categories">
+              <PropertyRef Name="ctg_id" />
+            </Principal>
+            <Dependent Role="tbl_products">
+              <PropertyRef Name="prd_ctg_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_sales_tbl_customers">
+          <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="0..1" />
+          <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_customers">
+              <PropertyRef Name="ctm_id" />
+            </Principal>
+            <Dependent Role="tbl_sales">
+              <PropertyRef Name="sal_ctm_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_sales_tbl_products">
+          <End Role="tbl_products" Type="Self.tbl_products" Multiplicity="0..1" />
+          <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_products">
+              <PropertyRef Name="prd_id" />
+            </Principal>
+            <Dependent Role="tbl_sales">
+              <PropertyRef Name="sal_prd_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_sales_tbl_staff">
+          <End Role="tbl_staff" Type="Self.tbl_staff" Multiplicity="0..1" />
+          <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_staff">
+              <PropertyRef Name="stf_id" />
+            </Principal>
+            <Dependent Role="tbl_sales">
+              <PropertyRef Name="sal_stf_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_StockTrackingMVCModelStoreContainer">
+          <EntitySet Name="tbl_categories" EntityType="Self.tbl_categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_customers" EntityType="Self.tbl_customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_products" EntityType="Self.tbl_products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_sales" EntityType="Self.tbl_sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_staff" EntityType="Self.tbl_staff" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_products_tbl_categories" Association="Self.FK_tbl_products_tbl_categories">
+            <End Role="tbl_categories" EntitySet="tbl_categories" />
+            <End Role="tbl_products" EntitySet="tbl_products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_sales_tbl_customers" Association="Self.FK_tbl_sales_tbl_customers">
+            <End Role="tbl_customers" EntitySet="tbl_customers" />
+            <End Role="tbl_sales" EntitySet="tbl_sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_sales_tbl_products" Association="Self.FK_tbl_sales_tbl_products">
+            <End Role="tbl_products" EntitySet="tbl_products" />
+            <End Role="tbl_sales" EntitySet="tbl_sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_sales_tbl_staff" Association="Self.FK_tbl_sales_tbl_staff">
+            <End Role="tbl_staff" EntitySet="tbl_staff" />
+            <End Role="tbl_sales" EntitySet="tbl_sales" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_StockTrackingMVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_categories">
+          <Key>
+            <PropertyRef Name="ctg_id" />
+          </Key>
+          <Property Name="ctg_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ctg_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_products" Relationship="Self.FK_tbl_products_tbl_categories" FromRole="tbl_categories" ToRole="tbl_products" />
+        </EntityType>
+        <EntityType Name="tbl_customers">
+          <Key>
+            <PropertyRef Name="ctm_id" />
+          </Key>
+          <Property Name="ctm_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ctm_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ctm_surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ctm_city" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ctm_balance" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="tbl_sales" Relationship="Self.FK_tbl_sales_tbl_customers" FromRole="tbl_customers" ToRole="tbl_sales" />
+        </EntityType>
+        <EntityType Name="tbl_products">
+          <Key>
+            <PropertyRef Name="prd_id" />
+          </Key>
+          <Property Name="prd_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prd_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prd_brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prd_stock" Type="Int16" />
+          <Property Name="prd_purchasePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="prd_salePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="prd_ctg_id" Type="Int32" />
+          <NavigationProperty Name="tbl_categories" Relationship="Self.FK_tbl_products_tbl_categories" FromRole="tbl_products" ToRole="tbl_categories" />
+          <NavigationProperty Name="tbl_sales" Relationship="Self.FK_tbl_sales_tbl_products" FromRole="tbl_products" ToRole="tbl_sales" />
+        </EntityType>
+        <EntityType Name="tbl_sales">
+          <Key>
+            <PropertyRef Name="sal_id" />
+          </Key>
+          <Property Name="sal_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sal_prd_id" Type="Int32" />
+          <Property Name="sal_stf_id" Type="Int32" />
+          <Property Name="sal_ctm_id" Type="Int32" />
+          <Property Name="sal_salePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="sal_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tbl_customers" Relationship="Self.FK_tbl_sales_tbl_customers" FromRole="tbl_sales" ToRole="tbl_customers" />
+          <NavigationProperty Name="tbl_products" Relationship="Self.FK_tbl_sales_tbl_products" FromRole="tbl_sales" ToRole="tbl_products" />
+          <NavigationProperty Name="tbl_staff" Relationship="Self.FK_tbl_sales_tbl_staff" FromRole="tbl_sales" ToRole="tbl_staff" />
+        </EntityType>
+        <EntityType Name="tbl_staff">
+          <Key>
+            <PropertyRef Name="stf_id" />
+          </Key>
+          <Property Name="stf_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stf_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="stf_surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="stf_department" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_sales" Relationship="Self.FK_tbl_sales_tbl_staff" FromRole="tbl_staff" ToRole="tbl_sales" />
+        </EntityType>
+        <Association Name="FK_tbl_products_tbl_categories">
+          <End Role="tbl_categories" Type="Self.tbl_categories" Multiplicity="0..1" />
+          <End Role="tbl_products" Type="Self.tbl_products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_categories">
+              <PropertyRef Name="ctg_id" />
+            </Principal>
+            <Dependent Role="tbl_products">
+              <PropertyRef Name="prd_ctg_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_sales_tbl_customers">
+          <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="0..1" />
+          <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_customers">
+              <PropertyRef Name="ctm_id" />
+            </Principal>
+            <Dependent Role="tbl_sales">
+              <PropertyRef Name="sal_ctm_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_sales_tbl_products">
+          <End Role="tbl_products" Type="Self.tbl_products" Multiplicity="0..1" />
+          <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_products">
+              <PropertyRef Name="prd_id" />
+            </Principal>
+            <Dependent Role="tbl_sales">
+              <PropertyRef Name="sal_prd_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_sales_tbl_staff">
+          <End Role="tbl_staff" Type="Self.tbl_staff" Multiplicity="0..1" />
+          <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_staff">
+              <PropertyRef Name="stf_id" />
+            </Principal>
+            <Dependent Role="tbl_sales">
+              <PropertyRef Name="sal_stf_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_StockTrackingMVCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_categories" EntityType="Self.tbl_categories" />
+          <EntitySet Name="tbl_customers" EntityType="Self.tbl_customers" />
+          <EntitySet Name="tbl_products" EntityType="Self.tbl_products" />
+          <EntitySet Name="tbl_sales" EntityType="Self.tbl_sales" />
+          <EntitySet Name="tbl_staff" EntityType="Self.tbl_staff" />
+          <AssociationSet Name="FK_tbl_products_tbl_categories" Association="Self.FK_tbl_products_tbl_categories">
+            <End Role="tbl_categories" EntitySet="tbl_categories" />
+            <End Role="tbl_products" EntitySet="tbl_products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_sales_tbl_customers" Association="Self.FK_tbl_sales_tbl_customers">
+            <End Role="tbl_customers" EntitySet="tbl_customers" />
+            <End Role="tbl_sales" EntitySet="tbl_sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_sales_tbl_products" Association="Self.FK_tbl_sales_tbl_products">
+            <End Role="tbl_products" EntitySet="tbl_products" />
+            <End Role="tbl_sales" EntitySet="tbl_sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_sales_tbl_staff" Association="Self.FK_tbl_sales_tbl_staff">
+            <End Role="tbl_staff" EntitySet="tbl_staff" />
+            <End Role="tbl_sales" EntitySet="tbl_sales" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_StockTrackingMVCModelStoreContainer" CdmEntityContainer="DB_StockTrackingMVCEntities">
+          <EntitySetMapping Name="tbl_categories">
+            <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_categories">
+              <MappingFragment StoreEntitySet="tbl_categories">
+                <ScalarProperty Name="ctg_id" ColumnName="ctg_id" />
+                <ScalarProperty Name="ctg_name" ColumnName="ctg_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_customers">
+            <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_customers">
+              <MappingFragment StoreEntitySet="tbl_customers">
+                <ScalarProperty Name="ctm_id" ColumnName="ctm_id" />
+                <ScalarProperty Name="ctm_name" ColumnName="ctm_name" />
+                <ScalarProperty Name="ctm_surname" ColumnName="ctm_surname" />
+                <ScalarProperty Name="ctm_city" ColumnName="ctm_city" />
+                <ScalarProperty Name="ctm_balance" ColumnName="ctm_balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_products">
+            <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_products">
+              <MappingFragment StoreEntitySet="tbl_products">
+                <ScalarProperty Name="prd_id" ColumnName="prd_id" />
+                <ScalarProperty Name="prd_name" ColumnName="prd_name" />
+                <ScalarProperty Name="prd_brand" ColumnName="prd_brand" />
+                <ScalarProperty Name="prd_stock" ColumnName="prd_stock" />
+                <ScalarProperty Name="prd_purchasePrice" ColumnName="prd_purchasePrice" />
+                <ScalarProperty Name="prd_salePrice" ColumnName="prd_salePrice" />
+                <ScalarProperty Name="prd_ctg_id" ColumnName="prd_ctg_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_sales">
+            <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_sales">
+              <MappingFragment StoreEntitySet="tbl_sales">
+                <ScalarProperty Name="sal_id" ColumnName="sal_id" />
+                <ScalarProperty Name="sal_prd_id" ColumnName="sal_prd_id" />
+                <ScalarProperty Name="sal_stf_id" ColumnName="sal_stf_id" />
+                <ScalarProperty Name="sal_ctm_id" ColumnName="sal_ctm_id" />
+                <ScalarProperty Name="sal_salePrice" ColumnName="sal_salePrice" />
+                <ScalarProperty Name="sal_date" ColumnName="sal_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_staff">
+            <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_staff">
+              <MappingFragment StoreEntitySet="tbl_staff">
+                <ScalarProperty Name="stf_id" ColumnName="stf_id" />
+                <ScalarProperty Name="stf_name" ColumnName="stf_name" />
+                <ScalarProperty Name="stf_surname" ColumnName="stf_surname" />
+                <ScalarProperty Name="stf_department" ColumnName="stf_department" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
