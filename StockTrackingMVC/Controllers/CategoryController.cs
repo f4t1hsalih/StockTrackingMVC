@@ -24,7 +24,6 @@ namespace StockTrackingMVC.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult AddCategory(tbl_categories category)
         {
             if (ModelState.IsValid)
@@ -72,7 +71,6 @@ namespace StockTrackingMVC.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult UpdateCategory(tbl_categories category)
         {
             if (ModelState.IsValid)

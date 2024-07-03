@@ -33,10 +33,17 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.prd_name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.prd_brand)</td>
+                        @if (item.prd_brand == null)
+                        {
+                            <td>Belirtilmemiş</td>
+                        }
+                        else
+                        {
+                            <td>@Html.DisplayFor(modelItem => item.prd_brand)</td>
+                        }
                         <td>@Html.DisplayFor(modelItem => item.prd_stock)</td>
-                        <td>@Html.DisplayFor(modelItem => item.prd_purchasePrice)</td>
-                        <td>@Html.DisplayFor(modelItem => item.prd_salePrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.prd_purchasePrice) ₺</td>
+                        <td>@Html.DisplayFor(modelItem => item.prd_salePrice) ₺</td>
                         <td>@Html.DisplayFor(modelItem => item.tbl_categories.ctg_name)</td>
                         <td>
                             @Html.ActionLink("Düzenle", "EditProduct", new { id = item.prd_id }, new { @class = "btn btn-info btn-sm mr-1" })
