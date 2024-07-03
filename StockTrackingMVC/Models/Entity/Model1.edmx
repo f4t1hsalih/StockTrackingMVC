@@ -11,6 +11,7 @@
           </Key>
           <Property Name="ctg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ctg_name" Type="varchar" MaxLength="50" />
+          <Property Name="ctg_status" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_customers">
           <Key>
@@ -55,6 +56,7 @@
           <Property Name="stf_name" Type="varchar" MaxLength="30" />
           <Property Name="stf_surname" Type="varchar" MaxLength="30" />
           <Property Name="stf_department" Type="varchar" MaxLength="30" />
+          <Property Name="stf_status" Type="bit" />
         </EntityType>
         <Association Name="FK_tbl_products_tbl_categories">
           <End Role="tbl_categories" Type="Self.tbl_categories" Multiplicity="0..1" />
@@ -138,6 +140,7 @@
           <Property Name="ctg_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ctg_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tbl_products" Relationship="Self.FK_tbl_products_tbl_categories" FromRole="tbl_categories" ToRole="tbl_products" />
+          <Property Name="ctg_status" Type="Boolean" />
         </EntityType>
         <EntityType Name="tbl_customers">
           <Key>
@@ -189,6 +192,7 @@
           <Property Name="stf_surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="stf_department" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tbl_sales" Relationship="Self.FK_tbl_sales_tbl_staff" FromRole="tbl_staff" ToRole="tbl_sales" />
+          <Property Name="stf_status" Type="Boolean" />
         </EntityType>
         <Association Name="FK_tbl_products_tbl_categories">
           <End Role="tbl_categories" Type="Self.tbl_categories" Multiplicity="0..1" />
@@ -270,6 +274,7 @@
           <EntitySetMapping Name="tbl_categories">
             <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_categories">
               <MappingFragment StoreEntitySet="tbl_categories">
+                <ScalarProperty Name="ctg_status" ColumnName="ctg_status" />
                 <ScalarProperty Name="ctg_id" ColumnName="ctg_id" />
                 <ScalarProperty Name="ctg_name" ColumnName="ctg_name" />
               </MappingFragment>
@@ -316,6 +321,7 @@
           <EntitySetMapping Name="tbl_staff">
             <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_staff">
               <MappingFragment StoreEntitySet="tbl_staff">
+                <ScalarProperty Name="stf_status" ColumnName="stf_status" />
                 <ScalarProperty Name="stf_id" ColumnName="stf_id" />
                 <ScalarProperty Name="stf_name" ColumnName="stf_name" />
                 <ScalarProperty Name="stf_surname" ColumnName="stf_surname" />

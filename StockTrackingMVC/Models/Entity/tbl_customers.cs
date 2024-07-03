@@ -11,8 +11,7 @@ namespace StockTrackingMVC.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tbl_customers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,20 +19,14 @@ namespace StockTrackingMVC.Models.Entity
         {
             this.tbl_sales = new HashSet<tbl_sales>();
         }
-
+    
         public int ctm_id { get; set; }
-
-        [Required(ErrorMessage = "Ad Alaný Boþ Geçilemez")]
-        [StringLength(30, ErrorMessage = "Ad Alaný 30 Karakterden Fazla Olamaz!")]
         public string ctm_name { get; set; }
-
-        [Required(ErrorMessage = "Soyad Alaný Boþ Geçilemez")]
-        [StringLength(30, ErrorMessage = "Soyad Alaný 30 Karakterden Fazla Olamaz!")]
         public string ctm_surname { get; set; }
         public string ctm_city { get; set; }
         public Nullable<decimal> ctm_balance { get; set; }
         public Nullable<bool> ctm_status { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_sales> tbl_sales { get; set; }
     }

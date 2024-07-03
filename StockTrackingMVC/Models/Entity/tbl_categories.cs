@@ -22,6 +22,7 @@ namespace StockTrackingMVC.Models.Entity
     
         public int ctg_id { get; set; }
         public string ctg_name { get; set; }
+        public Nullable<bool> ctg_status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_products> tbl_products { get; set; }

@@ -11,7 +11,7 @@ namespace StockTrackingMVC.Controllers
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
-                var categories = db.tbl_categories.ToList();
+                var categories = db.tbl_categories.Where(x => x.ctg_status != false).ToList();
                 return View(categories);
             }
         }
@@ -28,6 +28,7 @@ namespace StockTrackingMVC.Controllers
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
+                category.ctg_status = true;
                 db.tbl_categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -40,7 +41,7 @@ namespace StockTrackingMVC.Controllers
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
                 var category = db.tbl_categories.Find(id);
-                db.tbl_categories.Remove(category);
+                category.ctg_status = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
