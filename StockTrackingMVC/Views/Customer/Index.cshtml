@@ -34,21 +34,24 @@
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.ctm_name)</td>
                         <td>@Html.DisplayFor(modelItem => item.ctm_surname)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ctm_city)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ctm_balance)</td>
-                        <td>
-                            @Html.ActionLink("Düzenle", "UpdateCustomer", new { id = item.ctm_id }, new { @class = "btn btn-info btn-sm mr-1" })
-                        </td>
-                        <td>
-                            @Html.ActionLink("Sil", "DeleteCustomer", new { id = item.ctm_id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Bu müşteriyi silmek istediğinizden emin misiniz?');" })
-                        </td>
+                        @if (item.ctm_city == null)
+                        {
+                            <td>Belirtilmemiş</td>
+                        }
+                        else
+                        {
+                            <td>@Html.DisplayFor(modelItem => item.ctm_city)</td>
+                        }
+                        <td>@Html.DisplayFor(modelItem => item.ctm_balance) ₺</td>
+                        <td>@Html.ActionLink("Düzenle", "UpdateCustomer", new { id = item.ctm_id }, new { @class = "btn btn-info btn-sm mr-1" })</td>
+                        <td>@Html.ActionLink("Sil", "DeleteCustomer", new { id = item.ctm_id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Bu müşteriyi silmek istediğinizden emin misiniz?');" })</td>
                     </tr>
                 }
             </tbody>
         </table>
 
         <div class="pagination-container">
-            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.TwitterBootstrapPagerAligned)
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.TwitterBootstrapPagerAligned)
         </div>
     </div>
 }

@@ -24,23 +24,30 @@ namespace StockTrackingMVC.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult AddCustomer(tbl_customers customers)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(customers);
+            }
+
+            // Varsayılan değerler ayarlama
+            if (customers.ctm_balance == null)
+            {
+                customers.ctm_balance = 0;
+            }
+            customers.ctm_status = true;
+
+            // Veritabanı işlemleri
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(customers);
-                }
-                else
-                {
-                    customers.ctm_status = true;
-                    db.tbl_customers.Add(customers);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                db.tbl_customers.Add(customers);
+                db.SaveChanges();
             }
+
+            return RedirectToAction("Index");
         }
 
         // DeleteCustomer
@@ -48,12 +55,18 @@ namespace StockTrackingMVC.Controllers
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
-                var value = db.tbl_customers.Find(id);
-                value.ctm_status = false;
+                var customer = db.tbl_customers.Find(id);
+                if (customer == null)
+                {
+                    return HttpNotFound();
+                }
+
+                customer.ctm_status = false;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
+            return RedirectToAction("Index");
         }
+
 
         // UpdateCustomer
         [HttpGet]
@@ -61,30 +74,47 @@ namespace StockTrackingMVC.Controllers
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
-                var values = db.tbl_customers.Find(id);
-                return View(values);
+                var customer = db.tbl_customers.Find(id);
+                if (customer == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(customer);
             }
         }
+
         [HttpPost]
         public ActionResult UpdateCustomer(tbl_customers customers)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(customers);
+            }
+
+            // Varsayılan değerler ayarlama
+            if (customers.ctm_balance == null)
+            {
+                customers.ctm_balance = 0;
+            }
+
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
-                if (!ModelState.IsValid)
+                var customerToUpdate = db.tbl_customers.Find(customers.ctm_id);
+                if (customerToUpdate == null)
                 {
-                    return View(customers);
+                    return HttpNotFound();
                 }
-                else
-                {
-                    var value = db.tbl_customers.Find(customers.ctm_id);
-                    value.ctm_name = customers.ctm_name;
-                    value.ctm_surname = customers.ctm_surname;
-                    value.ctm_city = customers.ctm_city;
-                    value.ctm_balance = customers.ctm_balance;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+
+                customerToUpdate.ctm_name = customers.ctm_name;
+                customerToUpdate.ctm_surname = customers.ctm_surname;
+                customerToUpdate.ctm_city = customers.ctm_city;
+                customerToUpdate.ctm_balance = customers.ctm_balance;
+
+                db.SaveChanges();
             }
+
+            return RedirectToAction("Index");
         }
+
     }
 }
