@@ -1,7 +1,17 @@
-﻿/* site.css */
-/* Sabit navbar için stil */
-body {
-    padding-top: 56px; /* Navbar yüksekliği */
+﻿body {
+    padding-top: 4.5rem; /* Navbar yüksekliği */
+    background-color: #f8f9fa; /* Arka plan rengi */
+}
+
+.navbar-brand {
+    font-size: 1.5em;
+    color: #ffffff; /* Navbar metin rengi */
+    background-color: #ffffff; /* Navbar arka plan rengi */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.nav-link {
+    font-size: 18px;
 }
 
 @media (min-width: 992px) {
