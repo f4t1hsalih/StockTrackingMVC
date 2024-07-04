@@ -1,0 +1,52 @@
+﻿@model List<StockTrackingMVC.Models.Entity.tbl_staff>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-top:10px">Personel Listesi</h2>
+<hr />
+
+<p>
+    @Html.ActionLink("Personel Ekle", "AddStaff", null, new { @class = "btn btn-primary" })
+</p>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Ad</th>
+                    <th scope="col">Soyad</th>
+                    <th scope="col">Departman</th>
+                    <th scope="col">Düzenle</th>
+                    <th scope="col">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.stf_name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.stf_surname)</td>
+                        <td>@Html.DisplayFor(modelItem => item.stf_department)</td>
+                        <td>
+                            @Html.ActionLink("Düzenle", "EditStaff", new { id = item.stf_id }, new { @class = "btn btn-info btn-sm mr-1" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Sil", "DeleteStaff", new { id = item.stf_id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Bu personeli silmek istediğinizden emin misiniz?');" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p class="text-muted">Listelenecek personel bulunamadı.</p>
+}
+
+
