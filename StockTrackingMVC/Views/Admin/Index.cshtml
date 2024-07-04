@@ -53,11 +53,13 @@ else
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="adm_username">Kullanıcı Adı</label>
-                        <input type="text" class="form-control" id="adm_username" name="adm_username" required />
+                        <input type="text" class="form-control" id="adm_username" name="adm_username" required maxlength="20" />
+                        @Html.ValidationMessageFor(model => model[0].adm_username, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
                         <label for="adm_password">Şifre</label>
-                        <input type="password" class="form-control" id="adm_password" name="adm_password" required />
+                        <input type="password" class="form-control" id="adm_password" name="adm_password" required maxlength="20" />
+                        @Html.ValidationMessageFor(model => model[0].adm_password, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="modal-footer">
