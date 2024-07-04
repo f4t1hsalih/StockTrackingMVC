@@ -4,13 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DB_StockTrackingMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DB_StockTrackingMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_categories">
           <Key>
             <PropertyRef Name="ctg_id" />
           </Key>
           <Property Name="ctg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ctg_name" Type="varchar" MaxLength="50" />
+          <Property Name="ctg_name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ctg_status" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_customers">
@@ -18,8 +18,8 @@
             <PropertyRef Name="ctm_id" />
           </Key>
           <Property Name="ctm_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ctm_name" Type="varchar" MaxLength="30" />
-          <Property Name="ctm_surname" Type="varchar" MaxLength="30" />
+          <Property Name="ctm_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ctm_surname" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="ctm_city" Type="varchar" MaxLength="15" />
           <Property Name="ctm_balance" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ctm_status" Type="bit" />
@@ -29,7 +29,7 @@
             <PropertyRef Name="prd_id" />
           </Key>
           <Property Name="prd_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="prd_name" Type="varchar" MaxLength="50" />
+          <Property Name="prd_name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="prd_brand" Type="varchar" MaxLength="50" />
           <Property Name="prd_stock" Type="smallint" />
           <Property Name="prd_purchasePrice" Type="decimal" Precision="18" Scale="2" />
@@ -42,19 +42,19 @@
             <PropertyRef Name="sal_id" />
           </Key>
           <Property Name="sal_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="sal_prd_id" Type="int" />
-          <Property Name="sal_stf_id" Type="int" />
-          <Property Name="sal_ctm_id" Type="int" />
-          <Property Name="sal_salePrice" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="sal_date" Type="smalldatetime" />
+          <Property Name="sal_prd_id" Type="int" Nullable="false" />
+          <Property Name="sal_stf_id" Type="int" Nullable="false" />
+          <Property Name="sal_ctm_id" Type="int" Nullable="false" />
+          <Property Name="sal_salePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="sal_date" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_staff">
           <Key>
             <PropertyRef Name="stf_id" />
           </Key>
           <Property Name="stf_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="stf_name" Type="varchar" MaxLength="30" />
-          <Property Name="stf_surname" Type="varchar" MaxLength="30" />
+          <Property Name="stf_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="stf_surname" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="stf_department" Type="varchar" MaxLength="30" />
           <Property Name="stf_status" Type="bit" />
         </EntityType>
@@ -71,7 +71,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_sales_tbl_customers">
-          <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="0..1" />
+          <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="1" />
           <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_customers">
@@ -83,7 +83,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_sales_tbl_products">
-          <End Role="tbl_products" Type="Self.tbl_products" Multiplicity="0..1" />
+          <End Role="tbl_products" Type="Self.tbl_products" Multiplicity="1" />
           <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_products">
@@ -95,7 +95,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_sales_tbl_staff">
-          <End Role="tbl_staff" Type="Self.tbl_staff" Multiplicity="0..1" />
+          <End Role="tbl_staff" Type="Self.tbl_staff" Multiplicity="1" />
           <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_staff">
@@ -129,7 +129,8 @@
             <End Role="tbl_sales" EntitySet="tbl_sales" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_StockTrackingMVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -138,47 +139,47 @@
             <PropertyRef Name="ctg_id" />
           </Key>
           <Property Name="ctg_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ctg_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tbl_products" Relationship="Self.FK_tbl_products_tbl_categories" FromRole="tbl_categories" ToRole="tbl_products" />
+          <Property Name="ctg_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ctg_status" Type="Boolean" />
+          <NavigationProperty Name="tbl_products" Relationship="Self.FK_tbl_products_tbl_categories" FromRole="tbl_categories" ToRole="tbl_products" />
         </EntityType>
         <EntityType Name="tbl_customers">
           <Key>
             <PropertyRef Name="ctm_id" />
           </Key>
           <Property Name="ctm_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ctm_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="ctm_surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ctm_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ctm_surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ctm_city" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="ctm_balance" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="tbl_sales" Relationship="Self.FK_tbl_sales_tbl_customers" FromRole="tbl_customers" ToRole="tbl_sales" />
           <Property Name="ctm_status" Type="Boolean" />
+          <NavigationProperty Name="tbl_sales" Relationship="Self.FK_tbl_sales_tbl_customers" FromRole="tbl_customers" ToRole="tbl_sales" />
         </EntityType>
         <EntityType Name="tbl_products">
           <Key>
             <PropertyRef Name="prd_id" />
           </Key>
           <Property Name="prd_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="prd_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prd_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="prd_brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="prd_stock" Type="Int16" />
           <Property Name="prd_purchasePrice" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="prd_salePrice" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="prd_ctg_id" Type="Int32" />
+          <Property Name="prd_status" Type="Boolean" />
           <NavigationProperty Name="tbl_categories" Relationship="Self.FK_tbl_products_tbl_categories" FromRole="tbl_products" ToRole="tbl_categories" />
           <NavigationProperty Name="tbl_sales" Relationship="Self.FK_tbl_sales_tbl_products" FromRole="tbl_products" ToRole="tbl_sales" />
-          <Property Name="prd_status" Type="Boolean" />
         </EntityType>
         <EntityType Name="tbl_sales">
           <Key>
             <PropertyRef Name="sal_id" />
           </Key>
           <Property Name="sal_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="sal_prd_id" Type="Int32" />
-          <Property Name="sal_stf_id" Type="Int32" />
-          <Property Name="sal_ctm_id" Type="Int32" />
-          <Property Name="sal_salePrice" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="sal_date" Type="DateTime" Precision="0" />
+          <Property Name="sal_prd_id" Type="Int32" Nullable="false" />
+          <Property Name="sal_stf_id" Type="Int32" Nullable="false" />
+          <Property Name="sal_ctm_id" Type="Int32" Nullable="false" />
+          <Property Name="sal_salePrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="sal_date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="tbl_customers" Relationship="Self.FK_tbl_sales_tbl_customers" FromRole="tbl_sales" ToRole="tbl_customers" />
           <NavigationProperty Name="tbl_products" Relationship="Self.FK_tbl_sales_tbl_products" FromRole="tbl_sales" ToRole="tbl_products" />
           <NavigationProperty Name="tbl_staff" Relationship="Self.FK_tbl_sales_tbl_staff" FromRole="tbl_sales" ToRole="tbl_staff" />
@@ -188,11 +189,11 @@
             <PropertyRef Name="stf_id" />
           </Key>
           <Property Name="stf_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="stf_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="stf_surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="stf_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="stf_surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="stf_department" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tbl_sales" Relationship="Self.FK_tbl_sales_tbl_staff" FromRole="tbl_staff" ToRole="tbl_sales" />
           <Property Name="stf_status" Type="Boolean" />
+          <NavigationProperty Name="tbl_sales" Relationship="Self.FK_tbl_sales_tbl_staff" FromRole="tbl_staff" ToRole="tbl_sales" />
         </EntityType>
         <Association Name="FK_tbl_products_tbl_categories">
           <End Role="tbl_categories" Type="Self.tbl_categories" Multiplicity="0..1" />
@@ -207,7 +208,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_sales_tbl_customers">
-          <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="0..1" />
+          <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="1" />
           <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_customers">
@@ -219,7 +220,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_sales_tbl_products">
-          <End Role="tbl_products" Type="Self.tbl_products" Multiplicity="0..1" />
+          <End Role="tbl_products" Type="Self.tbl_products" Multiplicity="1" />
           <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_products">
@@ -231,7 +232,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_sales_tbl_staff">
-          <End Role="tbl_staff" Type="Self.tbl_staff" Multiplicity="0..1" />
+          <End Role="tbl_staff" Type="Self.tbl_staff" Multiplicity="1" />
           <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_staff">
@@ -274,28 +275,27 @@
           <EntitySetMapping Name="tbl_categories">
             <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_categories">
               <MappingFragment StoreEntitySet="tbl_categories">
-                <ScalarProperty Name="ctg_status" ColumnName="ctg_status" />
                 <ScalarProperty Name="ctg_id" ColumnName="ctg_id" />
                 <ScalarProperty Name="ctg_name" ColumnName="ctg_name" />
+                <ScalarProperty Name="ctg_status" ColumnName="ctg_status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_customers">
             <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_customers">
               <MappingFragment StoreEntitySet="tbl_customers">
-                <ScalarProperty Name="ctm_status" ColumnName="ctm_status" />
                 <ScalarProperty Name="ctm_id" ColumnName="ctm_id" />
                 <ScalarProperty Name="ctm_name" ColumnName="ctm_name" />
                 <ScalarProperty Name="ctm_surname" ColumnName="ctm_surname" />
                 <ScalarProperty Name="ctm_city" ColumnName="ctm_city" />
                 <ScalarProperty Name="ctm_balance" ColumnName="ctm_balance" />
+                <ScalarProperty Name="ctm_status" ColumnName="ctm_status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_products">
             <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_products">
               <MappingFragment StoreEntitySet="tbl_products">
-                <ScalarProperty Name="prd_status" ColumnName="prd_status" />
                 <ScalarProperty Name="prd_id" ColumnName="prd_id" />
                 <ScalarProperty Name="prd_name" ColumnName="prd_name" />
                 <ScalarProperty Name="prd_brand" ColumnName="prd_brand" />
@@ -303,6 +303,7 @@
                 <ScalarProperty Name="prd_purchasePrice" ColumnName="prd_purchasePrice" />
                 <ScalarProperty Name="prd_salePrice" ColumnName="prd_salePrice" />
                 <ScalarProperty Name="prd_ctg_id" ColumnName="prd_ctg_id" />
+                <ScalarProperty Name="prd_status" ColumnName="prd_status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -321,11 +322,11 @@
           <EntitySetMapping Name="tbl_staff">
             <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_staff">
               <MappingFragment StoreEntitySet="tbl_staff">
-                <ScalarProperty Name="stf_status" ColumnName="stf_status" />
                 <ScalarProperty Name="stf_id" ColumnName="stf_id" />
                 <ScalarProperty Name="stf_name" ColumnName="stf_name" />
                 <ScalarProperty Name="stf_surname" ColumnName="stf_surname" />
                 <ScalarProperty Name="stf_department" ColumnName="stf_department" />
+                <ScalarProperty Name="stf_status" ColumnName="stf_status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

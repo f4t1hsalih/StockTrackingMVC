@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="085aa22a0f9748ca98c902608ff44fbf" Name="Diagram1">
+      <Diagram DiagramId="df72d33c389e4b0dacfc9a049be53a3f" Name="Diagram1">
         <EntityTypeShape EntityType="DB_StockTrackingMVCModel.tbl_categories" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_StockTrackingMVCModel.tbl_customers" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_StockTrackingMVCModel.tbl_customers" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_StockTrackingMVCModel.tbl_products" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_StockTrackingMVCModel.tbl_sales" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_StockTrackingMVCModel.tbl_staff" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_StockTrackingMVCModel.tbl_sales" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_StockTrackingMVCModel.tbl_staff" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
         <AssociationConnector Association="DB_StockTrackingMVCModel.FK_tbl_products_tbl_categories" ManuallyRouted="false" />
         <AssociationConnector Association="DB_StockTrackingMVCModel.FK_tbl_sales_tbl_customers" ManuallyRouted="false" />
         <AssociationConnector Association="DB_StockTrackingMVCModel.FK_tbl_sales_tbl_products" ManuallyRouted="false" />
