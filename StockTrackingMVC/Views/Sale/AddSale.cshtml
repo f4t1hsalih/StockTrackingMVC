@@ -1,0 +1,34 @@
+﻿@model StockTrackingMVC.Models.Entity.tbl_sales
+
+@{
+    ViewBag.Title = "Satış Yap";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-top:10px">Satış Yap</h2>
+<hr />
+
+@using (Html.BeginForm("AddSale", "Sale", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.tbl_products.prd_id, "Ürün", htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.sal_prd_id, ViewBag.ProductForSales as SelectList, "Ürün Seçiniz", new { @class = "form-control", required = "required" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.tbl_staff.stf_id, "Personel", htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.sal_stf_id,ViewBag.StaffForSales as SelectList, "Personel Seçiniz", new { @class = "form-control", required = "required" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.tbl_customers.ctm_id, "Müşteri", htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.sal_ctm_id, ViewBag.CustomerForSales as SelectList, "Müşteri Seçiniz", new { @class = "form-control", required = "required" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sal_salePrice, "Satış Fiyatı", htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.sal_salePrice, new { htmlAttributes = new { @class = "form-control", placeholder = "Satış Fiyatı...", type = "number" } })
+        @Html.ValidationMessageFor(x => x.sal_salePrice, "", new { @style = "color:red" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Satış Yap" class="btn btn-success" />
+    </div>
+}
