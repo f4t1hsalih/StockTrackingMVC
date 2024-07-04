@@ -72,5 +72,17 @@ namespace StockTrackingMVC.Controllers
             }
         }
 
+        // DeleteStaff
+        public ActionResult DeleteStaff(int id)
+        {
+            using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
+            {
+                var staff = db.tbl_staff.Find(id);
+                staff.stf_status = false;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
     }
 }
