@@ -30,5 +30,6 @@ namespace StockTrackingMVC.Models.Entity
         public virtual DbSet<tbl_products> tbl_products { get; set; }
         public virtual DbSet<tbl_sales> tbl_sales { get; set; }
         public virtual DbSet<tbl_staff> tbl_staff { get; set; }
+        public virtual DbSet<tbl_admins> tbl_admins { get; set; }
     }
 }

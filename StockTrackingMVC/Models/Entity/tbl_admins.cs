@@ -12,17 +12,10 @@ namespace StockTrackingMVC.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_sales
+    public partial class tbl_admins
     {
-        public int sal_id { get; set; }
-        public int sal_prd_id { get; set; }
-        public int sal_stf_id { get; set; }
-        public int sal_ctm_id { get; set; }
-        public decimal sal_salePrice { get; set; }
-        public System.DateTime sal_date { get; set; }
-    
-        public virtual tbl_customers tbl_customers { get; set; }
-        public virtual tbl_products tbl_products { get; set; }
-        public virtual tbl_staff tbl_staff { get; set; }
+        public int adm_id { get; set; }
+        public string adm_username { get; set; }
+        public string adm_password { get; set; }
     }
 }

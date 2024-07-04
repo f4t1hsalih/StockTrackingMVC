@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_StockTrackingMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB_StockTrackingMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_admins">
+          <Key>
+            <PropertyRef Name="adm_id" />
+          </Key>
+          <Property Name="adm_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adm_username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="adm_password" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_categories">
           <Key>
             <PropertyRef Name="ctg_id" />
@@ -107,6 +115,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DB_StockTrackingMVCModelStoreContainer">
+          <EntitySet Name="tbl_admins" EntityType="Self.tbl_admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_categories" EntityType="Self.tbl_categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_customers" EntityType="Self.tbl_customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_products" EntityType="Self.tbl_products" Schema="dbo" store:Type="Tables" />
@@ -129,8 +138,7 @@
             <End Role="tbl_sales" EntitySet="tbl_sales" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_StockTrackingMVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -265,7 +273,16 @@
             <End Role="tbl_staff" EntitySet="tbl_staff" />
             <End Role="tbl_sales" EntitySet="tbl_sales" />
           </AssociationSet>
+          <EntitySet Name="tbl_admins" EntityType="DB_StockTrackingMVCModel.tbl_admins" />
         </EntityContainer>
+        <EntityType Name="tbl_admins">
+          <Key>
+            <PropertyRef Name="adm_id" />
+          </Key>
+          <Property Name="adm_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adm_username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="adm_password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -327,6 +344,15 @@
                 <ScalarProperty Name="stf_surname" ColumnName="stf_surname" />
                 <ScalarProperty Name="stf_department" ColumnName="stf_department" />
                 <ScalarProperty Name="stf_status" ColumnName="stf_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_admins">
+            <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_admins">
+              <MappingFragment StoreEntitySet="tbl_admins">
+                <ScalarProperty Name="adm_password" ColumnName="adm_password" />
+                <ScalarProperty Name="adm_username" ColumnName="adm_username" />
+                <ScalarProperty Name="adm_id" ColumnName="adm_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

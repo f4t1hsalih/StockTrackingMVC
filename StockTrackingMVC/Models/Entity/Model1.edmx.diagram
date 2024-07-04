@@ -14,6 +14,7 @@
         <AssociationConnector Association="DB_StockTrackingMVCModel.FK_tbl_sales_tbl_customers" ManuallyRouted="false" />
         <AssociationConnector Association="DB_StockTrackingMVCModel.FK_tbl_sales_tbl_products" ManuallyRouted="false" />
         <AssociationConnector Association="DB_StockTrackingMVCModel.FK_tbl_sales_tbl_staff" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DB_StockTrackingMVCModel.tbl_admins" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

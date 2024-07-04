@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div style="margin-top:20px" class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Ürünler</h5>
+                    <p class="card-text">Ürün yönetimi için buraya tıklayın.</p>
+                    <div class="text-end">
+                        <a href="@Url.Action("Index", "Product")" class="btn btn-primary">Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Müşteriler</h5>
+                    <p class="card-text">Müşteri yönetimi için buraya tıklayın.</p>
+                    <div class="text-end">
+                        <a href="@Url.Action("Index", "Customer")" class="btn btn-primary">Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Kategoriler</h5>
+                    <p class="card-text">Kategori yönetimi için buraya tıklayın.</p>
+                    <div class="text-end">
+                        <a href="@Url.Action("Index", "Category")" class="btn btn-primary">Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Personeller</h5>
+                    <p class="card-text">Personel yönetimi için buraya tıklayın.</p>
+                    <div class="text-end">
+                        <a href="@Url.Action("Index", "Staff")" class="btn btn-primary">Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Satışlar</h5>
+                    <p class="card-text">Satış yönetimi için buraya tıklayın.</p>
+                    <div class="text-end">
+                        <a href="@Url.Action("Index", "Sale")" class="btn btn-primary">Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Ayarlar</h5>
+                    <p class="card-text">Ayar yönetimi için buraya tıklayın.</p>
+                    <div class="text-end">
+                        <a href="@Url.Action("Index", "Settings")" class="btn btn-primary">Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
