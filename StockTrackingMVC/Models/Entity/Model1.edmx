@@ -12,6 +12,7 @@
           <Property Name="adm_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="adm_username" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="adm_password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="adm_status" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_categories">
           <Key>
@@ -282,6 +283,7 @@
           <Property Name="adm_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="adm_username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="adm_password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="adm_status" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -350,6 +352,7 @@
           <EntitySetMapping Name="tbl_admins">
             <EntityTypeMapping TypeName="DB_StockTrackingMVCModel.tbl_admins">
               <MappingFragment StoreEntitySet="tbl_admins">
+                <ScalarProperty Name="adm_status" ColumnName="adm_status" />
                 <ScalarProperty Name="adm_password" ColumnName="adm_password" />
                 <ScalarProperty Name="adm_username" ColumnName="adm_username" />
                 <ScalarProperty Name="adm_id" ColumnName="adm_id" />

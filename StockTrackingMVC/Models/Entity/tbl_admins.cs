@@ -17,5 +17,6 @@ namespace StockTrackingMVC.Models.Entity
         public int adm_id { get; set; }
         public string adm_username { get; set; }
         public string adm_password { get; set; }
+        public Nullable<bool> adm_status { get; set; }
     }
 }
