@@ -21,6 +21,7 @@ namespace StockTrackingMVC.Controllers
                 if (value != null)
                 {
                     FormsAuthentication.SetAuthCookie(user.adm_username, false);
+                    Session["Username"] = user.adm_username;
                     return RedirectToAction("Index", "Default");
                 }
                 else
@@ -29,6 +30,12 @@ namespace StockTrackingMVC.Controllers
                     return View(user);
                 }
             }
+        }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            return RedirectToAction("Login", "Login");
         }
     }
 }

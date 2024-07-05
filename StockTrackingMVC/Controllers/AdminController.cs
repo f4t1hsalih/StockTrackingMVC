@@ -10,6 +10,12 @@ namespace StockTrackingMVC.Controllers
         [Authorize]
         public ActionResult Index(string search)
         {
+            string username = Session["Username"] as string;
+            if (username == "kullanıcı1")
+            {
+                return RedirectToAction("Unauthorized", "Error"); // Yetkisiz erişim sayfasına yönlendirme
+            }
+
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
                 var admins = db.tbl_admins.Where(x => x.adm_status != false).ToList();
@@ -23,13 +29,28 @@ namespace StockTrackingMVC.Controllers
 
         // AddAdmin
         [HttpGet]
+        [Authorize]
         public ActionResult AddAdmin()
         {
+            string username = Session["Username"] as string;
+            if (username == "kullanıcı1")
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+
             return View();
         }
+
         [HttpPost]
+        [Authorize]
         public ActionResult AddAdmin(tbl_admins admin)
         {
+            string username = Session["Username"] as string;
+            if (username == "kullanıcı1")
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
                 admin.adm_status = true;
@@ -38,6 +59,5 @@ namespace StockTrackingMVC.Controllers
                 return RedirectToAction("Index");
             }
         }
-
     }
 }
