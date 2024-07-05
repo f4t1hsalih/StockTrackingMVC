@@ -3,75 +3,112 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="container">
-    <div style="margin-top:20px" class="row">
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mb-4 text-center">Yönetim Paneli</h2>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Ürünler -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-box-open fa-3x text-primary"></i>
+                    </div>
                     <h5 class="card-title">Ürünler</h5>
                     <p class="card-text">Ürün yönetimi için buraya tıklayın.</p>
-                    <div class="text-end">
-                        <a href="@Url.Action("Index", "Product")" class="btn btn-primary">Git</a>
-                    </div>
+                    <a href="@Url.Action("Index", "Product")" class="btn btn-primary">Git</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
+        <!-- Müşteriler -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-users fa-3x text-success"></i>
+                    </div>
                     <h5 class="card-title">Müşteriler</h5>
                     <p class="card-text">Müşteri yönetimi için buraya tıklayın.</p>
-                    <div class="text-end">
-                        <a href="@Url.Action("Index", "Customer")" class="btn btn-primary">Git</a>
-                    </div>
+                    <a href="@Url.Action("Index", "Customer")" class="btn btn-success">Git</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
+        <!-- Kategoriler -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-tags fa-3x text-warning"></i>
+                    </div>
                     <h5 class="card-title">Kategoriler</h5>
                     <p class="card-text">Kategori yönetimi için buraya tıklayın.</p>
-                    <div class="text-end">
-                        <a href="@Url.Action("Index", "Category")" class="btn btn-primary">Git</a>
-                    </div>
+                    <a href="@Url.Action("Index", "Category")" class="btn btn-warning">Git</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
+        <!-- Personeller -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-user-tie fa-3x text-info"></i>
+                    </div>
                     <h5 class="card-title">Personeller</h5>
                     <p class="card-text">Personel yönetimi için buraya tıklayın.</p>
-                    <div class="text-end">
-                        <a href="@Url.Action("Index", "Staff")" class="btn btn-primary">Git</a>
-                    </div>
+                    <a href="@Url.Action("Index", "Staff")" class="btn btn-info">Git</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
+        <!-- Satışlar -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-shopping-cart fa-3x text-danger"></i>
+                    </div>
                     <h5 class="card-title">Satışlar</h5>
                     <p class="card-text">Satış yönetimi için buraya tıklayın.</p>
-                    <div class="text-end">
-                        <a href="@Url.Action("Index", "Sale")" class="btn btn-primary">Git</a>
-                    </div>
+                    <a href="@Url.Action("Index", "Sale")" class="btn btn-danger">Git</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
+        <!-- Adminler -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-user-shield fa-3x text-secondary"></i>
+                    </div>
                     <h5 class="card-title">Adminler</h5>
                     <p class="card-text">Admin yönetimi için buraya tıklayın.</p>
-                    <div class="text-end">
-                        <a href="@Url.Action("Index", "Admin")" class="btn btn-primary">Git</a>
-                    </div>
+                    <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">Git</a>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Ekstra Bilgi veya Grafikler -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h4 class="mb-3">Genel Bilgiler</h4>
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <p class="card-text">Bu proje, ASP.NET MVC kullanılarak geliştirilen bir stok takip uygulamasıdır. Uygulama, ürün yönetimi, müşteri yönetimi, satış işlemleri ve personel yönetimi gibi temel özellikleri içermektedir.</p>
+                </div>
+            </div>
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <p class="card-text">Daha fazla proje görmek için <a href="https://github.com/f4t1hsalih" target="_blank">GitHub profilimi</a> 👨‍💻 ziyaret edebilirsin!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<!-- FontAwesome için -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

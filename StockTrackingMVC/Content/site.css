@@ -18,6 +18,11 @@
     text-align: right;
 }
 
+.input-group-append {
+    align-items: center; /* Dikey hizalama ortalaması için */
+    display: flex; /* Flexbox kullanarak öğeleri hizalar */
+}
+
 @media (min-width: 992px) {
     body {
         padding-top: 70px; /* Sabit navbar yüksekliği için 992px ve üzeri ekranlar */
