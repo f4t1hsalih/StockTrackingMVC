@@ -1,9 +1,7 @@
 ﻿using StockTrackingMVC.Models.Entity;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace StockTrackingMVC.Controllers
 {
@@ -17,15 +15,20 @@ namespace StockTrackingMVC.Controllers
         [HttpPost]
         public ActionResult Login(tbl_admins user)
         {
-            //using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
-            //{
-            //    var value = db.tbl_admins.Where(user.adm_username == db.tbl_admins && user.adm_password ==);
-            //        if (value.)
-            //    {
-
-            //    }
-            //}
-                return View();
+            using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
+            {
+                var value = db.tbl_admins.Where(x => x.adm_username == user.adm_username && x.adm_password == user.adm_password && x.adm_status == true).FirstOrDefault();
+                if (value != null)
+                {
+                    FormsAuthentication.SetAuthCookie(user.adm_username, false);
+                    return RedirectToAction("Index", "Default");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Kullanıcı Adı Veya Şifre Yanlış.");
+                    return View(user);
+                }
+            }
         }
     }
 }
