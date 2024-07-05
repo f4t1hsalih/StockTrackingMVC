@@ -7,6 +7,7 @@ namespace StockTrackingMVC.Controllers
     public class StaffController : Controller
     {
         // GET: Staff
+        [Authorize]
         public ActionResult Index(string search)
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())

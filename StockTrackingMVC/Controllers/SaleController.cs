@@ -10,6 +10,7 @@ namespace StockTrackingMVC.Controllers
         private DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities();
 
         // GET: Sale
+        [Authorize]
         public ActionResult Index()
         {
             var sales = db.tbl_sales

@@ -8,6 +8,7 @@ namespace StockTrackingMVC.Controllers
     public class CustomerController : Controller
     {
         // GET: Customer
+        [Authorize]
         public ActionResult Index(string search, int page = 1)
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())

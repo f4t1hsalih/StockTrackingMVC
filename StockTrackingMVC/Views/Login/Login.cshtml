@@ -54,7 +54,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
             <button type="submit" class="btn btn-primary">Giriş Yap</button>
 
-            @if (!ViewData.ModelState.IsValid)
+            if (!ViewData.ModelState.IsValid)
             {
                 <div class="alert alert-danger mt-3">
                     @Html.ValidationSummary(true)
