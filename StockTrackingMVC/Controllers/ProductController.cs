@@ -7,11 +7,15 @@ namespace StockTrackingMVC.Controllers
     public class ProductController : Controller
     {
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
                 var products = db.tbl_products.Include("tbl_categories").Where(x => x.prd_status != false).ToList();
+                if (!string.IsNullOrEmpty(search))
+                {
+                    products = products.Where(x => x.prd_name.Contains(search)).ToList();
+                }
                 return View(products);
             }
         }

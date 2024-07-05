@@ -7,11 +7,15 @@ namespace StockTrackingMVC.Controllers
     public class CategoryController : Controller
     {
         // GET: Category
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
                 var categories = db.tbl_categories.Where(x => x.ctg_status != false).ToList();
+                if (!string.IsNullOrEmpty(search))
+                {
+                    categories = categories.Where(x => x.ctg_name.Contains(search)).ToList();
+                }
                 return View(categories);
             }
         }

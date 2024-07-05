@@ -8,13 +8,19 @@ namespace StockTrackingMVC.Controllers
     public class CustomerController : Controller
     {
         // GET: Customer
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(string search, int page = 1)
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
-                //var customers = db.tbl_customers.ToList();
-                var customerList = db.tbl_customers.Where(x => x.ctm_status != false).ToList().ToPagedList(page, 10);
-                return View(customerList);
+                var customerList = db.tbl_customers
+                                    .Where(x => x.ctm_status != false);
+
+                if (!string.IsNullOrEmpty(search))
+                {
+                    customerList = customerList.Where(x => x.ctm_name.Contains(search) || x.ctm_surname.Contains(search));
+                }
+
+                return View(customerList.ToList().ToPagedList(page, 10));
             }
         }
 

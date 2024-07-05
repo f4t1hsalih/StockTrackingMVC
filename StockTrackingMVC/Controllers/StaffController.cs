@@ -7,11 +7,15 @@ namespace StockTrackingMVC.Controllers
     public class StaffController : Controller
     {
         // GET: Staff
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
                 var staff = db.tbl_staff.Where(x => x.stf_status != false).ToList();
+                if (!string.IsNullOrEmpty(search))
+                {
+                    staff = staff.Where(x => x.stf_name.Contains(search)).ToList();
+                }
                 return View(staff);
             }
         }
