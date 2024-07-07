@@ -12,16 +12,21 @@ namespace StockTrackingMVC.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Login(tbl_admins user)
         {
             using (DB_StockTrackingMVCEntities db = new DB_StockTrackingMVCEntities())
             {
-                var value = db.tbl_admins.Where(x => x.adm_username == user.adm_username && x.adm_password == user.adm_password && x.adm_status == true).FirstOrDefault();
+                string lowerUsername = user.adm_username.ToLower();
+                var value = db.tbl_admins
+                    .Where(x => x.adm_username.ToLower() == lowerUsername && x.adm_password == user.adm_password && x.adm_status == true)
+                    .FirstOrDefault();
+
                 if (value != null)
                 {
-                    FormsAuthentication.SetAuthCookie(user.adm_username, false);
-                    Session["Username"] = user.adm_username;
+                    FormsAuthentication.SetAuthCookie(lowerUsername, false);
+                    Session["Username"] = lowerUsername;
                     return RedirectToAction("Index", "Default");
                 }
                 else
@@ -31,6 +36,7 @@ namespace StockTrackingMVC.Controllers
                 }
             }
         }
+
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();

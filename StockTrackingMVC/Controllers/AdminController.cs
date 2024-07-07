@@ -10,7 +10,7 @@ namespace StockTrackingMVC.Controllers
         [Authorize]
         public ActionResult Index(string search)
         {
-            string username = Session["Username"] as string;
+            string username = (Session["Username"] as string)?.ToLower();
             if (username == "kullanıcı1")
             {
                 return RedirectToAction("Unauthorized", "Error"); // Yetkisiz erişim sayfasına yönlendirme
@@ -32,7 +32,7 @@ namespace StockTrackingMVC.Controllers
         [Authorize]
         public ActionResult AddAdmin()
         {
-            string username = Session["Username"] as string;
+            string username = (Session["Username"] as string)?.ToLower();
             if (username == "kullanıcı1")
             {
                 return RedirectToAction("Unauthorized", "Error");
@@ -45,7 +45,7 @@ namespace StockTrackingMVC.Controllers
         [Authorize]
         public ActionResult AddAdmin(tbl_admins admin)
         {
-            string username = Session["Username"] as string;
+            string username = (Session["Username"] as string)?.ToLower();
             if (username == "kullanıcı1")
             {
                 return RedirectToAction("Unauthorized", "Error");
